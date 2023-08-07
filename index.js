@@ -21,13 +21,9 @@ const writeToCache = (data) => {
     fs.writeFileSync("count.json", JSON.stringify(data));
 };
 
-const readFromCache = () => {
-    return JSON.parse(fs.readFileSync('count.json').toString());
-};
+const readFromCache = () => JSON.parse(fs.readFileSync('count.json').toString());
 
-const fetchUser = async id => {
-    return (await client.users.fetch(id)).username
-};
+const fetchUser = async (id) => (await client.users.fetch(id)).username;
 
 const setStatus = (max) => {
     client.user.setActivity(`${max.username} is 1st with a count of ${max.count}`);
@@ -110,6 +106,6 @@ client.on("messageCreate", async (message) => {
     }
 });
 
-setInterval(() => writeToCache(data), 60000); //update dmoj points every 5
+setInterval(() => writeToCache(data), 60000);
 
 client.login(process.env.TOKEN);
